@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +20,13 @@ public class DoctorController {
     private DoctorRepository doctorRepository;
 
     @GetMapping(value="/api/doctors", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Doctor>> getAllPatients(){
+    public ResponseEntity<List<Doctor>> getAllDoctors(){
         return ResponseEntity.ok(doctorRepository.findAll());
+    }
+
+    @GetMapping(value="/api/personal-doctors", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Doctor>> getPersonalDoctors(){
+        return ResponseEntity.ok(doctorRepository.findPersonalDoctors());
     }
 
     @GetMapping(value="/api/doctor/get-by-id/{doctorId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,7 +37,7 @@ public class DoctorController {
     @PostMapping(value="/api/doctor/register-doctor", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> registerDoctor(@RequestBody RegisterDoctorRequest registerDoctorRequest) {
         Doctor doctor = new Doctor();
-        doctor.setPersonalDoctor(registerDoctorRequest.isPersonalDoctor());
+        doctor.setIsPersonalDoctor(registerDoctorRequest.getIsPersonalDoctor());
         doctor.setName(registerDoctorRequest.getName());
         doctor.setSpecialty(registerDoctorRequest.getSpecialty());
         doctorRepository.save(doctor);
@@ -44,17 +46,17 @@ public class DoctorController {
 
     @PostMapping(value="/api/doctor/update-doctor", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateDoctor(@RequestBody UpdateDoctorRequest updateDoctorRequest) {
-        Doctor doctor = doctorRepository.getReferenceById(updateDoctorRequest.getId());
-        doctor.setPersonalDoctor(updateDoctorRequest.isPersonalDoctor());
+        Doctor doctor = doctorRepository.findById(updateDoctorRequest.getId()).get();
+        doctor.setIsPersonalDoctor(updateDoctorRequest.getIsPersonalDoctor());
         doctor.setName(updateDoctorRequest.getName());
         doctor.setSpecialty(updateDoctorRequest.getSpecialty());
         doctorRepository.save(doctor);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping(value="/api/patient/delete-doctor/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value="/api/patient/delete-doctor/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteDoctor(@PathVariable long id) {
         doctorRepository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

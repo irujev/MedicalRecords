@@ -24,7 +24,7 @@ public class RegisterDoctorRequest {
         this.specialty = specialty;
     }
 
-    public boolean isPersonalDoctor() {
+    public boolean getIsPersonalDoctor() {
         return isPersonalDoctor;
     }
 

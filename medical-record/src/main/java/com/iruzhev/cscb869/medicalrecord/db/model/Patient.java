@@ -48,7 +48,7 @@ public class Patient {
         this.egn = egn;
     }
 
-    public boolean isHasPaidSocialSecurity() {
+    public boolean getHasPaidSocialSecurity() {
         return hasPaidSocialSecurity;
     }
 

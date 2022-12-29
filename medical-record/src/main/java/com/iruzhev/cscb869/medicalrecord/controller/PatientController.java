@@ -61,7 +61,7 @@ public class PatientController {
 
     @PostMapping(value="/api/patient/update-patient", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updatePatient(@RequestBody UpdatePatientRequest updatePatientRequest) {
-        Patient patient = patientRepository.getReferenceById(updatePatientRequest.getId());
+        Patient patient = patientRepository.findById(updatePatientRequest.getId()).get();
         patient.setEgn(updatePatientRequest.getEgn());
         patient.setName(updatePatientRequest.getName());
         patient.setHasPaidSocialSecurity(updatePatientRequest.isHasPaidSocialSecurity());

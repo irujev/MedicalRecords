@@ -41,11 +41,11 @@ public class Doctor {
         this.specialty = specialty;
     }
 
-    public boolean isPersonalDoctor() {
+    public boolean getIsPersonalDoctor() {
         return isPersonalDoctor;
     }
 
-    public void setPersonalDoctor(boolean personalDoctor) {
+    public void setIsPersonalDoctor(boolean personalDoctor) {
         isPersonalDoctor = personalDoctor;
     }
 
