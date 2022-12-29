@@ -34,6 +34,30 @@ export class DoctorComponent implements OnInit {
       }
     });
   }
+  registerDoctor() {
+    this.doctorService
+      .registerDoctor({
+        name: this.doctor.name,
+        specialty: this.doctor.specialty,
+        isPersonalDoctor: this.doctor.isPersonalDoctor,
+      })
+      .subscribe((result) => {
+        this.router.navigate(['/admin-dashboard']);
+      });
+  }
+
+  updateDoctorData() {
+    this.doctorService
+      .updateDoctor({
+        id: this.doctor.id,
+        name: this.doctor.name,
+        specialty: this.doctor.specialty,
+        isPersonalDoctor: this.doctor.isPersonalDoctor,
+      })
+      .subscribe((result) => {
+        this.router.navigate(['/admin-dashboard']);
+      });
+  }
 
   backToDashboard() {
     this.router.navigate(['/admin-dashboard']);

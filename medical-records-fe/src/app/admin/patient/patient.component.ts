@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Doctor } from 'src/app/model/doctor.model';
 import { Patient } from 'src/app/model/patient.model';
+import { DoctorService } from 'src/app/service/doctor.service';
 import { PatientService } from 'src/app/service/patient.service';
 
 @Component({
@@ -14,12 +16,23 @@ export class PatientComponent implements OnInit {
     name: '',
     egn: '',
     hasPaidSocialSecurity: false,
+    personalDoctor: {
+      id: 0,
+      name: '',
+      specialty: '',
+      isPersonalDoctor: false,
+    },
   };
+
+  doctorId: number = 0;
+
+  personalDoctors: Doctor[] = [];
 
   constructor(
     private patientService: PatientService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private doctorService: DoctorService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +47,20 @@ export class PatientComponent implements OnInit {
         this.patient.id = 0;
       }
     });
+    this.doctorService.findPersonalDoctors().subscribe((doctors) => {
+      this.personalDoctors = doctors;
+      console.log('Patient id is 0 ' + (this.patient.id == 0));
+      console.log('Personal doctor is  ');
+      console.log(this.patient.personalDoctor);
+      if (
+        this.patient.id == 0 ||
+        // this.patient.personalDoctor == null ||
+        this.patient.personalDoctor?.id == 0
+      ) {
+        console.log('Setting default id ' + doctors[0].id);
+        this.doctorId = doctors[0].id;
+      }
+    });
   }
 
   registerPatient(): void {
@@ -42,7 +69,7 @@ export class PatientComponent implements OnInit {
         name: this.patient.name,
         egn: this.patient.egn,
         hasPaidSocialSecurity: this.patient.hasPaidSocialSecurity,
-        doctorId: 0,
+        doctorId: this.doctorId,
       })
       .subscribe((result) => {
         this.router.navigate(['/admin-dashboard']);
@@ -55,7 +82,7 @@ export class PatientComponent implements OnInit {
         name: this.patient.name,
         egn: this.patient.egn,
         hasPaidSocialSecurity: this.patient.hasPaidSocialSecurity,
-        doctorId: 0,
+        doctorId: this.doctorId,
         id: this.patient.id,
       })
       .subscribe((result) => {
@@ -65,5 +92,8 @@ export class PatientComponent implements OnInit {
 
   backToDashboard() {
     this.router.navigate(['/admin-dashboard']);
+  }
+  isFormValid(): boolean {
+    return false;
   }
 }

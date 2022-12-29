@@ -4,12 +4,12 @@ export interface Doctor {
   specialty: string;
   isPersonalDoctor: boolean;
 }
-export interface CreatePatientRequest {
+export interface CreateDoctorRequest {
   name: string;
   specialty: string;
   isPersonalDoctor: boolean;
 }
-export interface UpdatePatientRequest {
+export interface UpdateDoctorRequest {
   id: number;
   name: string;
   specialty: string;

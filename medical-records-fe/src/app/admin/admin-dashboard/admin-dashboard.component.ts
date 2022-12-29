@@ -42,6 +42,7 @@ export class AdminDashboardComponent implements OnInit {
       this.patients = patients;
     });
     this.doctorService.findAllDoctors().subscribe((doctors) => {
+      console.log(doctors);
       this.doctors = doctors;
     });
   }
@@ -63,5 +64,9 @@ export class AdminDashboardComponent implements OnInit {
   editDoctor(doctorId: number) {
     this.router.navigate(['/admin-doctor', { doctorId: doctorId }]);
   }
-  deleteDoctor(doctorId: number) {}
+  deleteDoctor(doctorId: number) {
+    this.doctorService
+      .deleteDoctor(doctorId)
+      .subscribe((doctor) => console.log('Doctor was deleted'));
+  }
 }

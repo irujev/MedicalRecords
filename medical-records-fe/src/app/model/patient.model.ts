@@ -5,7 +5,7 @@ export interface Patient {
   name: string;
   egn: string;
   hasPaidSocialSecurity: boolean;
-  personalDoctor?: Doctor;
+  personalDoctor: Doctor;
 }
 
 export interface CreatePatientRequest {

@@ -17,7 +17,11 @@ export class DoctorService {
   }
 
   public findAllDoctors(): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>(this.adminUrl + '/patients');
+    return this.http.get<Doctor[]>(this.adminUrl + '/doctors');
+  }
+
+  public findPersonalDoctors(): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(this.adminUrl + '/personal-doctors');
   }
 
   public findDoctorById(doctorId: number): Observable<Doctor> {
@@ -38,6 +42,12 @@ export class DoctorService {
     return this.http.post<any>(
       this.adminUrl + '/doctor/update-doctor',
       doctorData
+    );
+  }
+
+  public deleteDoctor(doctorId: number): Observable<any> {
+    return this.http.delete<any>(
+      this.adminUrl + '/patient/delete-doctor/' + doctorId
     );
   }
 }

@@ -33,10 +33,30 @@
   >Осигурявал ли се е за последните 6 месеца</mat-checkbox
 >
 
+<mat-form-field appearance="fill">
+  <mat-label>Доктори</mat-label>
+  <mat-select [(ngModel)]="doctorId">
+    <mat-option *ngFor="let doctor of personalDoctors" [value]="doctor.id">{{
+      doctor.name
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>
 <!-- <button mat-raised-button>Basic</button> -->
 <div *ngIf="patient.id == 0; else updatePatientButton">
-  <button mat-raised-button (click)="registerPatient()">Регистрирай</button>
+  <button
+    mat-raised-button
+    (click)="registerPatient()"
+    [disabled]="isFormValid()"
+  >
+    Регистрирай
+  </button>
 </div>
 <ng-template #updatePatientButton>
-  <button mat-raised-button (click)="updatePatientData()">Промени</button>
+  <button
+    mat-raised-button
+    (click)="updatePatientData()"
+    [disabled]="isFormValid()"
+  >
+    Промени
+  </button>
 </ng-template>

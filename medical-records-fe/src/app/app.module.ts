@@ -18,6 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { DoctorComponent } from './admin/doctor/doctor.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DoctorComponent } from './admin/doctor/doctor.component';
     MatToolbarModule,
     MatCheckboxModule,
     MatIconModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

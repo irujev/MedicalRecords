@@ -5,8 +5,8 @@
     </button>
     <span
       >Администраторски панел ->
-      <span *ngIf="doctor.id == 0; else updatePatient">Регистрация</span>
-      <ng-template #updatePatient>Промяна</ng-template> на доктор</span
+      <span *ngIf="doctor.id == 0; else updateDoctor">Регистрация</span>
+      <ng-template #updateDoctor>Промяна</ng-template> на доктор</span
     >
     <span class="example-spacer"></span>
     <button
@@ -18,25 +18,30 @@
     </button>
   </mat-toolbar>
 </p>
-<!--   
-  <mat-form-field class="example-full-width">
-    <mat-label>Име на пациента</mat-label>
-    <input matInput placeholder="Име" value="Sushi" [(ngModel)]="patient.name" />
-  </mat-form-field>
-  
-  <mat-form-field class="example-full-width">
-    <mat-label>ЕГН на пациента</mat-label>
-    <input matInput placeholder="Име" value="Sushi" [(ngModel)]="patient.egn" />
-  </mat-form-field>
-  
-  <mat-checkbox class="example-margin" [(ngModel)]="patient.hasPaidSocialSecurity"
-    >Осигурявал ли се е за последните 6 месеца</mat-checkbox
-  >
-  
-  <!-- <button mat-raised-button>Basic</button> -->
-<!-- <div *ngIf="patient.id == 0; else updatePatientButton">
-  <button mat-raised-button (click)="registerPatient()">Регистрирай</button>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Име на Доктор</mat-label>
+  <input matInput placeholder="Име" value="Sushi" [(ngModel)]="doctor.name" />
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Специалност</mat-label>
+  <input
+    matInput
+    placeholder="Име"
+    value="Sushi"
+    [(ngModel)]="doctor.specialty"
+  />
+</mat-form-field>
+
+<mat-checkbox class="example-margin" [(ngModel)]="doctor.isPersonalDoctor"
+  >Личен лекар ли е</mat-checkbox
+>
+
+<!-- <button mat-raised-button>Basic</button> -->
+<div *ngIf="doctor.id == 0; else updatePatientButton">
+  <button mat-raised-button (click)="registerDoctor()">Регистрирай</button>
 </div>
 <ng-template #updatePatientButton>
-  <button mat-raised-button (click)="updatePatientData()">Промени</button>
-</ng-template> -->
+  <button mat-raised-button (click)="updateDoctorData()">Промени</button>
+</ng-template>
