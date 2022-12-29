@@ -6,22 +6,26 @@ import { AppComponent } from './app.component';
 import { PatientComponent } from './admin/patient/patient.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
-import {MatInputModule} from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-import {MatTableModule} from '@angular/material/table';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { DoctorComponent } from './admin/doctor/doctor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PatientComponent,
     LoginComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    DoctorComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +38,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatButtonModule,
     MatTableModule,
     MatExpansionModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCheckboxModule,
+    MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

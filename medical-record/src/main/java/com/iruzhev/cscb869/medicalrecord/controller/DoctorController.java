@@ -27,7 +27,12 @@ public class DoctorController {
         return ResponseEntity.ok(doctorRepository.findAll());
     }
 
-    @PostMapping(value="/api/patient/register-doctor", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/api/doctor/get-by-id/{doctorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Doctor> getDoctorById(@PathVariable long doctorId){
+        return ResponseEntity.ok(doctorRepository.findById(doctorId).get());
+    }
+
+    @PostMapping(value="/api/doctor/register-doctor", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> registerDoctor(@RequestBody RegisterDoctorRequest registerDoctorRequest) {
         Doctor doctor = new Doctor();
         doctor.setPersonalDoctor(registerDoctorRequest.isPersonalDoctor());
@@ -37,7 +42,7 @@ public class DoctorController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping(value="/api/patient/update-doctor", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/api/doctor/update-doctor", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateDoctor(@RequestBody UpdateDoctorRequest updateDoctorRequest) {
         Doctor doctor = doctorRepository.getReferenceById(updateDoctorRequest.getId());
         doctor.setPersonalDoctor(updateDoctorRequest.isPersonalDoctor());

@@ -12,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,13 +31,24 @@ public class PatientController {
         return ResponseEntity.ok(patientRepository.findAll());
     }
 
+
+    @GetMapping(value="/api/patient/get-by-egn/{patientEgn}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Patient> getPatientByEgn(@PathVariable String patientEgn){
+        return ResponseEntity.ok(patientRepository.findPatientByEgn(patientEgn));
+    }
+
+    @GetMapping(value="/api/patient/get-by-id/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Patient> getPatientById(@PathVariable long patientId){
+        return ResponseEntity.ok(patientRepository.findById(patientId).get());
+    }
+
     @PostMapping(value="/api/patient/register-patient", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> registerPatient(@RequestBody RegisterPatientRequest registerPatientRequest) {
+    public ResponseEntity<Void> registerPatient(@RequestBody RegisterPatientRequest registerPatientDataRequest) {
         Patient patient = new Patient();
-        patient.setEgn(registerPatientRequest.getEgn());
-        patient.setName(registerPatientRequest.getName());
-        patient.setHasPaidSocialSecurity(registerPatientRequest.isHasPaidSocialSecurity());
-        Optional<Doctor> doctor = doctorRepository.findById(registerPatientRequest.getDoctorId());
+        patient.setEgn(registerPatientDataRequest.getEgn());
+        patient.setName(registerPatientDataRequest.getName());
+        patient.setHasPaidSocialSecurity(registerPatientDataRequest.isHasPaidSocialSecurity());
+        Optional<Doctor> doctor = doctorRepository.findById(registerPatientDataRequest.getDoctorId());
         if(doctor.isPresent()){
             patient.setPersonalDoctor(doctor.get());
         }

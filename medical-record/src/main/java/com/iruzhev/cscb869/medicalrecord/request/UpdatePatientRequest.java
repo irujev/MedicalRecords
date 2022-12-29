@@ -1,11 +1,5 @@
 package com.iruzhev.cscb869.medicalrecord.request;
 
-import com.iruzhev.cscb869.medicalrecord.db.model.Doctor;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-
 public class UpdatePatientRequest {
 
     private long id;

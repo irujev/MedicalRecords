@@ -35,7 +35,7 @@ public class PatientVisitationController {
     private MedicalNoteRepository medicalNoteRepository;
 
     @PostMapping(value="/api/patient/visit-doctor", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> registerPatient(@RequestBody DoctorVisitationRequest doctorVisitationRequest) {
+    public ResponseEntity<Void> visitDoctor(@RequestBody DoctorVisitationRequest doctorVisitationRequest) {
         DoctorVisitation visitation = new DoctorVisitation();
         Patient patient = patientRepository.getReferenceById(doctorVisitationRequest.getPatientId());
         visitation.setPatient(patient);

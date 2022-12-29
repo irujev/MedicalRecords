@@ -63,8 +63,8 @@
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="patientsColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: patientsColumns"></tr>
     </table>
     <button
       mat-raised-button
@@ -72,6 +72,64 @@
       (click)="createNewPatient()"
     >
       Регистрирай нов пациент
+    </button>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Доктори </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <table mat-table [dataSource]="doctors" class="mat-elevation-z8">
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Идентификационен номер</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Име</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="specialty">
+        <th mat-header-cell *matHeaderCellDef>Специалност</th>
+        <td mat-cell *matCellDef="let element">{{ element.specialty }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="isPersonalDoctor">
+        <th mat-header-cell *matHeaderCellDef>Личен Лекар</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.hasPaidSocialSecurity }}
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Действия</th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="editDoctor(element.id)">Промяна</button>
+          <button (click)="deleteDoctor(element.id)">Изтриване</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="doctorsColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: doctorsColumns"></tr>
+    </table>
+    <button
+      mat-raised-button
+      class="create-patient-button"
+      (click)="createNewDoctor()"
+    >
+      Регистрирай нов доктор
     </button>
   </mat-expansion-panel>
 </mat-accordion>
