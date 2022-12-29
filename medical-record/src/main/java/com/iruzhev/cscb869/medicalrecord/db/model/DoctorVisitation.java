@@ -16,6 +16,8 @@ public class DoctorVisitation {
 
     private Date visitationDate;
 
+    private boolean done;
+
     public Patient getPatient() {
         return patient;
     }
@@ -30,5 +32,21 @@ public class DoctorVisitation {
 
     public void setVisitationDate(Date visitationDate) {
         this.visitationDate = visitationDate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public boolean getDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }

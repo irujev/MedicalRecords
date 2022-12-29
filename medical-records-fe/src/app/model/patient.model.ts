@@ -6,6 +6,7 @@ export interface Patient {
   egn: string;
   hasPaidSocialSecurity: boolean;
   personalDoctor: Doctor;
+  medicalNotesHistory: MedicalNote[];
 }
 
 export interface CreatePatientRequest {
@@ -21,4 +22,12 @@ export interface UpdatePatientRequest {
   egn: string;
   hasPaidSocialSecurity: boolean;
   doctorId: number;
+}
+export interface MedicalNote {
+  id: number;
+  sickness: string;
+  doctor: Doctor;
+  treatment: string;
+  hospitationStartDate: string;
+  hospitationEndDate: string;
 }

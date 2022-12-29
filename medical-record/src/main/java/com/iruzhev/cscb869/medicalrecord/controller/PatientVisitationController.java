@@ -14,10 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Collection;
 import java.util.List;
 
 public class PatientVisitationController {
@@ -42,6 +44,12 @@ public class PatientVisitationController {
         visitation.setVisitationDate(doctorVisitationRequest.getVisitationDate());
         doctorVisitationRepository.save(visitation);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping(value="/api/visitations/by-patient-id/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Collection<DoctorVisitation>> getVisitationsByPatient(@PathVariable long patientId){
+        Patient patient = patientRepository.getReferenceById(patientId);
+        return ResponseEntity.ok(doctorVisitationRepository.getVisitationsByPatient(patient));
     }
 
     @PostMapping(value="/api/patient/create-medical-note", produces = MediaType.APPLICATION_JSON_VALUE)

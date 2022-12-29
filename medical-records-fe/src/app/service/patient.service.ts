@@ -27,6 +27,12 @@ export class PatientService {
     );
   }
 
+  public findPatientByEgn(patientEgn: string): Observable<Patient> {
+    return this.http.get<Patient>(
+      this.adminUrl + '/patient/get-by-egn/' + patientEgn
+    );
+  }
+
   public registerPatient(patientData: CreatePatientRequest): Observable<any> {
     console.log(patientData);
     return this.http.post<any>(

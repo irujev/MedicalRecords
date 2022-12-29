@@ -21,7 +21,7 @@ public class Patient {
     @OneToOne
     private Doctor personalDoctor;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "patient")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "patient_id")
     private List<MedicalNote> medicalNotesHistory = new ArrayList<>();
 
     public Integer getId() {

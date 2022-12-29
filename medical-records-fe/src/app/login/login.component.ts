@@ -6,35 +6,39 @@ import { PatientService } from '../service/patient.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  constructor(private patientService: PatientService,
+  constructor(
+    private patientService: PatientService,
     private localService: LocalService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
-  selectedVal:string = 'patient';
-  patientEgn:string = '';
-  doctorIdentification:string = '';
-  adminName:string = '';
+  selectedVal: string = 'patient';
+  patientEgn: string = '';
+  doctorIdentification: string = '';
+  adminName: string = '';
 
   // (click)="onSave()"
-  loginAsPatient(){
-    console.log('Logging as patient');
+  loginAsPatient() {
+    this.patientService
+      .findPatientByEgn(this.patientEgn)
+      .subscribe((patient) => {
+        this.localService.saveData('patientId', patient.id + ''); //patient-dashboard
+        this.router.navigate(['/patient-dashboard']);
+      });
   }
-  loginAsDoctor(){
+  loginAsDoctor() {
     console.log('Logging as doctor');
   }
-  loginAsAdmin(){
-    if(this.adminName === 'admin'){
-      this.localService.saveData('isAdmin','true');
+  loginAsAdmin() {
+    if (this.adminName === 'admin') {
+      this.localService.saveData('isAdmin', 'true');
       this.router.navigate(['/admin-dashboard']);
     }
     console.log('Logging as admin');
   }
-
 }

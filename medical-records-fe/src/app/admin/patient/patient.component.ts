@@ -13,16 +13,7 @@ import { PatientService } from 'src/app/service/patient.service';
 export class PatientComponent implements OnInit {
   patient: Patient = {
     id: 0,
-    name: '',
-    egn: '',
-    hasPaidSocialSecurity: false,
-    personalDoctor: {
-      id: 0,
-      name: '',
-      specialty: '',
-      isPersonalDoctor: false,
-    },
-  };
+  } as Patient;
 
   doctorId: number = 0;
 
@@ -49,15 +40,11 @@ export class PatientComponent implements OnInit {
     });
     this.doctorService.findPersonalDoctors().subscribe((doctors) => {
       this.personalDoctors = doctors;
-      console.log('Patient id is 0 ' + (this.patient.id == 0));
-      console.log('Personal doctor is  ');
-      console.log(this.patient.personalDoctor);
       if (
         this.patient.id == 0 ||
         // this.patient.personalDoctor == null ||
         this.patient.personalDoctor?.id == 0
       ) {
-        console.log('Setting default id ' + doctors[0].id);
         this.doctorId = doctors[0].id;
       }
     });

@@ -4,12 +4,14 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { DoctorComponent } from './admin/doctor/doctor.component';
 import { PatientComponent } from './admin/patient/patient.component';
 import { LoginComponent } from './login/login.component';
+import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'admin-patient', component: PatientComponent },
   { path: 'admin-doctor', component: DoctorComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'patient-dashboard', component: PatientDashboardComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: LoginComponent },
 ];

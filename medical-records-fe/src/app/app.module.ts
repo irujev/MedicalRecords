@@ -19,6 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { DoctorComponent } from './admin/doctor/doctor.component';
 import { MatSelectModule } from '@angular/material/select';
+import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatSelectModule } from '@angular/material/select';
     LoginComponent,
     AdminDashboardComponent,
     DoctorComponent,
+    PatientDashboardComponent,
   ],
   imports: [
     BrowserModule,
