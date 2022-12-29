@@ -1,0 +1,22 @@
+<p>
+  <mat-toolbar>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+    ></button>
+    <span
+      >Администраторски панел ->
+      <span *ngIf="patientId == 0; else updatePatient">Регистрация</span>
+      <ng-template #updatePatient>Промяна</ng-template> на пациент</span
+    >
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon log-out-button"
+      aria-label="Example icon-button with heart icon"
+    >
+      Log out
+    </button>
+  </mat-toolbar>
+</p>

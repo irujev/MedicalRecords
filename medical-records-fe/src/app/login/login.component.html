@@ -1,0 +1,33 @@
+<section>
+  <mat-button-toggle-group [(value)]="selectedVal" aria-label="Font Style">
+    <mat-button-toggle value="patient">Пациент</mat-button-toggle>
+    <mat-button-toggle value="doctor">Доктор</mat-button-toggle>
+    <mat-button-toggle value="admin">Админ</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div *ngIf="selectedVal == 'patient'">
+    Въведи ЕГН на пациент
+
+    <mat-form-field class="example-full-width">
+      <mat-label>ЕГН на пациент</mat-label>
+      <input matInput [(ngModel)]="patientEgn" />
+    </mat-form-field>
+    <button mat-raised-button (click)="loginAsPatient()">Въведи</button>
+  </div>
+  <div *ngIf="selectedVal == 'doctor'">
+    Въведи идентификационнен номер на Доктор
+    <mat-form-field class="example-full-width">
+      <mat-label>Номер на доктор</mat-label>
+      <input matInput [(ngModel)]="doctorIdentification" />
+    </mat-form-field>
+    <button mat-raised-button (click)="loginAsDoctor()">Въведи</button>
+  </div>
+  <div *ngIf="selectedVal == 'admin'">
+    Въведи име на администратор
+    <mat-form-field class="example-full-width">
+      <mat-label>Име на администратор</mat-label>
+      <input matInput [(ngModel)]="adminName" />
+    </mat-form-field>
+    <button mat-raised-button (click)="loginAsAdmin()">Въведи</button>
+  </div>
+</section>
