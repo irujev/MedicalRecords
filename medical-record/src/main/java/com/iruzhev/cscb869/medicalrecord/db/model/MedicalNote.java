@@ -2,10 +2,11 @@ package com.iruzhev.cscb869.medicalrecord.db.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class MedicalNote {
+public class MedicalNote implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;

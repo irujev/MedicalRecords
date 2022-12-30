@@ -20,6 +20,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { DoctorComponent } from './admin/doctor/doctor.component';
 import { MatSelectModule } from '@angular/material/select';
 import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
+import { PatientVisitationComponent } from './patient/patient-visitation/patient-visitation.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { PatientDashboardComponent } from './patient/patient-dashboard/patient-d
     AdminDashboardComponent,
     DoctorComponent,
     PatientDashboardComponent,
+    PatientVisitationComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +49,8 @@ import { PatientDashboardComponent } from './patient/patient-dashboard/patient-d
     MatCheckboxModule,
     MatIconModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

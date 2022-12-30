@@ -1,0 +1,41 @@
+<p>
+  <mat-toolbar>
+    <button mat-icon-button class="example-icon" (click)="backToDashboard()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Пациентски панел -> <span>Регистрация</span></span>
+    <!-- <ng-template #updatePatient>Промяна</ng-template> за преглед</span -->
+    >
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon log-out-button"
+      aria-label="Example icon-button with heart icon"
+    >
+      Log out
+    </button>
+  </mat-toolbar>
+</p>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Оплакване:</mat-label>
+  <input matInput [(ngModel)]="visitationRegistration.complains" />
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Choose a date</mat-label>
+  <input
+    matInput
+    [matDatepicker]="picker"
+    [(ngModel)]="visitationRegistration.visitationDate"
+  />
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<button
+  mat-raised-button
+  (click)="registerVisitation()"
+  [disabled]="isFormValid()"
+>
+  Регистрирай
+</button>

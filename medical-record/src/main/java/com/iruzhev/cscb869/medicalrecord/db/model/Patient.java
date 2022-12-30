@@ -2,11 +2,14 @@ package com.iruzhev.cscb869.medicalrecord.db.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-public class Patient {
+public class Patient implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -21,8 +24,11 @@ public class Patient {
     @OneToOne
     private Doctor personalDoctor;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "patient_id")
-    private List<MedicalNote> medicalNotesHistory = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "patient")
+    private Set<MedicalNote> medicalNotesHistory = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "patient")
+    private Set<DoctorVisitation> doctorVisitations = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -64,11 +70,19 @@ public class Patient {
         this.personalDoctor = personalDoctor;
     }
 
-    public List<MedicalNote> getMedicalNotesHistory() {
+    public Set<MedicalNote> getMedicalNotesHistory() {
         return medicalNotesHistory;
     }
 
-    public void setMedicalNotesHistory(List<MedicalNote> medicalNotesHistory) {
+    public void setMedicalNotesHistory(Set<MedicalNote> medicalNotesHistory) {
         this.medicalNotesHistory = medicalNotesHistory;
+    }
+
+    public Set<DoctorVisitation> getDoctorVisitations() {
+        return doctorVisitations;
+    }
+
+    public void setDoctorVisitations(Set<DoctorVisitation> doctorVisitations) {
+        this.doctorVisitations = doctorVisitations;
     }
 }

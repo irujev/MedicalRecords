@@ -8,6 +8,8 @@ public class DoctorVisitationRequest {
 
     private Date visitationDate;
 
+    private String complains;
+
     public long getPatientId() {
         return patientId;
     }
@@ -22,5 +24,13 @@ public class DoctorVisitationRequest {
 
     public void setVisitationDate(Date visitationDate) {
         this.visitationDate = visitationDate;
+    }
+
+    public String getComplains() {
+        return complains;
+    }
+
+    public void setComplains(String complains) {
+        this.complains = complains;
     }
 }

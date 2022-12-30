@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Collection;
 
 public interface DoctorVisitationRepository extends JpaRepository<DoctorVisitation, Long> {
-    @Query("SELECT dv FROM DoctorVisitation dv WHERE dv.patient = ?1")
+    @Query("SELECT v FROM DoctorVisitation v WHERE v.patient = ?1 AND v.done= false")
     Collection<DoctorVisitation> getVisitationsByPatient(Patient patient);
 }

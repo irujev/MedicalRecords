@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class PatientController {
@@ -80,7 +81,7 @@ public class PatientController {
     }
 
     @GetMapping(value="/api/patient-medical-notes/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<MedicalNote>> getPatientMedicalNotes(@PathVariable long patientId){
+    public ResponseEntity<Set<MedicalNote>> getPatientMedicalNotes(@PathVariable long patientId){
         Patient patient = patientRepository.getReferenceById(patientId);
         return ResponseEntity.ok(patient.getMedicalNotesHistory());
     }

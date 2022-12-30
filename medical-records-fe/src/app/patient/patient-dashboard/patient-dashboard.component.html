@@ -72,20 +72,31 @@
     </mat-expansion-panel-header>
     <table
       mat-table
-      [dataSource]="patient.medicalNotesHistory"
+      [dataSource]="requestedVisitations"
       class="mat-elevation-z8"
     >
       <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
       <!-- Position Column -->
+      <ng-container matColumnDef="complains">
+        <th mat-header-cell *matHeaderCellDef>Оплаквания</th>
+        <td mat-cell *matCellDef="let element">{{ element.complains }}</td>
+      </ng-container>
       <ng-container matColumnDef="visitationData">
         <th mat-header-cell *matHeaderCellDef>Дата за преглед</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.visitationDate }}</td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="medicalNotesColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: medicalNotesColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="visitationColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: visitationColumns"></tr>
     </table>
+    <button
+      mat-raised-button
+      class="create-patient-button"
+      (click)="registerVisitation()"
+    >
+      Регистрирай нов преглед
+    </button>
   </mat-expansion-panel>
 </mat-accordion>

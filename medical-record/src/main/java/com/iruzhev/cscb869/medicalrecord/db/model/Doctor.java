@@ -2,8 +2,10 @@ package com.iruzhev.cscb869.medicalrecord.db.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
-public class Doctor {
+public class Doctor implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
