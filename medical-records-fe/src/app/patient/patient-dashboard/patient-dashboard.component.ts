@@ -51,4 +51,8 @@ export class PatientDashboardComponent implements OnInit {
   registerVisitation() {
     this.router.navigate(['/patient-visitation']);
   }
+
+  logPatient(element: any) {
+    console.log(element);
+  }
 }

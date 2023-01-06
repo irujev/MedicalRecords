@@ -1,5 +1,6 @@
 package com.iruzhev.cscb869.medicalrecord.db.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -25,6 +26,7 @@ public class MedicalNote implements Serializable {
     private Date hospitationEndDate;
 
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id")
     private Patient patient;

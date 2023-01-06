@@ -23,6 +23,8 @@ import { PatientDashboardComponent } from './patient/patient-dashboard/patient-d
 import { PatientVisitationComponent } from './patient/patient-visitation/patient-visitation.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DoctorDashboardComponent } from './doctor/doctor-dashboard/doctor-dashboard.component';
+import { VisitationComponent } from './doctor/visitation/visitation.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     DoctorComponent,
     PatientDashboardComponent,
     PatientVisitationComponent,
+    DoctorDashboardComponent,
+    VisitationComponent,
   ],
   imports: [
     BrowserModule,

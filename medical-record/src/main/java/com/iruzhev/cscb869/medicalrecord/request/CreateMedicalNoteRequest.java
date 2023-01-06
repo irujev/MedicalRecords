@@ -12,6 +12,8 @@ public class CreateMedicalNoteRequest {
 
     private long doctorId;
 
+    private long visitationId;
+
     private String sickness;
 
     private String treatment;
@@ -66,5 +68,13 @@ public class CreateMedicalNoteRequest {
 
     public void setHospitationEndDate(Date hospitationEndDate) {
         this.hospitationEndDate = hospitationEndDate;
+    }
+
+    public long getVisitationId() {
+        return visitationId;
+    }
+
+    public void setVisitationId(long visitationId) {
+        this.visitationId = visitationId;
     }
 }

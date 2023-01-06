@@ -11,4 +11,6 @@ import java.util.Collection;
 public interface DoctorVisitationRepository extends JpaRepository<DoctorVisitation, Long> {
     @Query("SELECT v FROM DoctorVisitation v WHERE v.patient = ?1 AND v.done= false")
     Collection<DoctorVisitation> getVisitationsByPatient(Patient patient);
+    @Query("SELECT v FROM DoctorVisitation v WHERE v.done= false")
+    Collection<DoctorVisitation> getOpenVisitations();
 }

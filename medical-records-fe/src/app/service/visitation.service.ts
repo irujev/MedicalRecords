@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Visitation } from '../model/visitation.model';
+import {
+  MedicalNoteRequest,
+  OpenVisitation,
+  Visitation,
+} from '../model/visitation.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,8 +29,23 @@ export class VisitationService {
     visitationData: Visitation
   ): Observable<Visitation[]> {
     return this.http.post<any>(
-      this.adminUrl + '/patient/visit-doctor',
+      this.adminUrl + '/patient/register-visitation',
       visitationData
+    );
+  }
+
+  public getOpenVisitations(): Observable<OpenVisitation[]> {
+    return this.http.get<any>(
+      this.adminUrl + '/visitation/get-open-visitations'
+    );
+  }
+
+  public createMedicalNote(
+    medicalNoteData: MedicalNoteRequest
+  ): Observable<OpenVisitation[]> {
+    return this.http.post<any>(
+      this.adminUrl + '/patient/create-medical-note',
+      medicalNoteData
     );
   }
 }

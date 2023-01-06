@@ -1,0 +1,63 @@
+<p>
+  <mat-toolbar>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+    ></button>
+    <span>Докторски панел</span>
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon log-out-button"
+      aria-label="Example icon-button with heart icon"
+    >
+      Log out
+    </button>
+  </mat-toolbar>
+</p>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Заявени посещения </mat-panel-title>
+    </mat-expansion-panel-header>
+    <table
+      mat-table
+      [dataSource]="openDoctorVisitation"
+      class="mat-elevation-z8"
+    >
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="patientName">
+        <th mat-header-cell *matHeaderCellDef>Име на пациент</th>
+        <td mat-cell *matCellDef="let element">{{ element.patientName }}</td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="complaints">
+        <th mat-header-cell *matHeaderCellDef>Оплакване</th>
+        <td mat-cell *matCellDef="let element">{{ element.complains }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="visitationDate">
+        <th mat-header-cell *matHeaderCellDef>Дата за посещение</th>
+        <td mat-cell *matCellDef="let element">{{ element.visitationDate }}</td>
+      </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Действия</th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="startVisitation(element.id, element.patientId)">
+            Прегледай
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="doctorVisitationsColumn"></tr>
+      <tr mat-row *matRowDef="let row; columns: doctorVisitationsColumn"></tr>
+    </table>
+  </mat-expansion-panel>
+</mat-accordion>
