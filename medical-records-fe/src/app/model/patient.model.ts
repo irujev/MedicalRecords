@@ -31,3 +31,10 @@ export interface MedicalNote {
   hospitationStartDate: string;
   hospitationEndDate: string;
 }
+
+export interface MedicalNoteResponse {
+  sickness: string;
+  treatment: string;
+  hospitalisationInterval: string;
+  patientName: string;
+}

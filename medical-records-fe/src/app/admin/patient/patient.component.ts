@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Doctor } from 'src/app/model/doctor.model';
 import { Patient } from 'src/app/model/patient.model';
 import { DoctorService } from 'src/app/service/doctor.service';
+import { LocalService } from 'src/app/service/local.service';
 import { PatientService } from 'src/app/service/patient.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class PatientComponent implements OnInit {
     private patientService: PatientService,
     private router: Router,
     private route: ActivatedRoute,
+    private localService: LocalService,
     private doctorService: DoctorService
   ) {}
 
@@ -82,5 +84,9 @@ export class PatientComponent implements OnInit {
   }
   isFormValid(): boolean {
     return false;
+  }
+  logout() {
+    this.localService.removeData('isAdmin');
+    this.router.navigate(['/login']);
   }
 }

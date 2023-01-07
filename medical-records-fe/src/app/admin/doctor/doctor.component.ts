@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Doctor } from 'src/app/model/doctor.model';
 import { DoctorService } from 'src/app/service/doctor.service';
+import { LocalService } from 'src/app/service/local.service';
 
 @Component({
   selector: 'app-doctor',
@@ -19,6 +20,7 @@ export class DoctorComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private localService: LocalService,
     private doctorService: DoctorService
   ) {}
 
@@ -61,5 +63,9 @@ export class DoctorComponent implements OnInit {
 
   backToDashboard() {
     this.router.navigate(['/admin-dashboard']);
+  }
+  logout() {
+    this.localService.removeData('isAdmin');
+    this.router.navigate(['/login']);
   }
 }

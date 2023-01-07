@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { MedicalNoteResponse } from 'src/app/model/patient.model';
 import { OpenVisitation, Visitation } from 'src/app/model/visitation.model';
 import { LocalService } from 'src/app/service/local.service';
 import { VisitationService } from 'src/app/service/visitation.service';
@@ -11,11 +13,18 @@ import { VisitationService } from 'src/app/service/visitation.service';
 })
 export class DoctorDashboardComponent implements OnInit {
   openDoctorVisitation: OpenVisitation[] = [];
+  allMedicalNotes = new MatTableDataSource<MedicalNoteResponse>();
   doctorVisitationsColumn: string[] = [
     'patientName',
     'complaints',
     'visitationDate',
     'actions',
+  ];
+  allMedicalNotesColumns: string[] = [
+    'patientName',
+    'sickness',
+    'treatment',
+    'hospitalisationInterval',
   ];
 
   constructor(
@@ -30,6 +39,11 @@ export class DoctorDashboardComponent implements OnInit {
       .subscribe(
         (openVisitations) => (this.openDoctorVisitation = openVisitations)
       );
+    this.visitationService
+      .getAllDoctorsVisitations()
+      .subscribe((visitations) => {
+        this.allMedicalNotes.data = visitations;
+      });
   }
 
   startVisitation(visitationId: number, patientId: number) {
@@ -39,5 +53,13 @@ export class DoctorDashboardComponent implements OnInit {
       '/doctor-visitation',
       { patientId: patientId, visitationId: visitationId },
     ]);
+  }
+  public doFilter = (event: any) => {
+    const value = (event.target as HTMLInputElement).value;
+    this.allMedicalNotes.filter = value.trim().toLocaleLowerCase();
+  };
+  logout() {
+    this.localService.removeData('doctorId');
+    this.router.navigate(['/login']);
   }
 }

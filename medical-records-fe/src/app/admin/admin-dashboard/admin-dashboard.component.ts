@@ -69,4 +69,9 @@ export class AdminDashboardComponent implements OnInit {
       .deleteDoctor(doctorId)
       .subscribe((doctor) => console.log('Doctor was deleted'));
   }
+
+  logout() {
+    this.localService.removeData('isAdmin');
+    this.router.navigate(['/login']);
+  }
 }

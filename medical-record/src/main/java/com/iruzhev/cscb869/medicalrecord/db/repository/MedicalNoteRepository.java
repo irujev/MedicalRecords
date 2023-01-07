@@ -12,4 +12,5 @@ public interface MedicalNoteRepository  extends JpaRepository<MedicalNote, Long>
 
     @Query("SELECT mn FROM MedicalNote mn WHERE mn.sickness = ?1")
     List<MedicalNote> findMedicalNotesBySickness(String sickness);
+
 }

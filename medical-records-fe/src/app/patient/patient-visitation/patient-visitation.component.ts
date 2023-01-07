@@ -39,4 +39,8 @@ export class PatientVisitationComponent implements OnInit {
       });
   }
   isFormValid() {}
+  logout() {
+    this.localService.removeData('patientId');
+    this.router.navigate(['/login']);
+  }
 }

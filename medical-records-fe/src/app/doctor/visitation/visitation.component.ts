@@ -44,4 +44,8 @@ export class VisitationComponent implements OnInit {
         this.router.navigate(['/doctor-dashboard']);
       });
   }
+  logout() {
+    this.localService.removeData('doctorId');
+    this.router.navigate(['/login']);
+  }
 }

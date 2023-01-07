@@ -10,6 +10,7 @@ import com.iruzhev.cscb869.medicalrecord.db.repository.PatientRepository;
 import com.iruzhev.cscb869.medicalrecord.db.repository.DoctorVisitationRepository;
 import com.iruzhev.cscb869.medicalrecord.request.CreateMedicalNoteRequest;
 import com.iruzhev.cscb869.medicalrecord.request.DoctorVisitationRequest;
+import com.iruzhev.cscb869.medicalrecord.response.MedicalNoteResponse;
 import com.iruzhev.cscb869.medicalrecord.response.OpenDoctorVisitationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -89,10 +92,23 @@ public class PatientVisitationController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping(value="/api/patient/display-doctor-medical-notes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> displayDoctorMedicalNotes(@PathVariable long id) {
-        Doctor doctor = doctorRepository.getReferenceById(id);
-        List<Patient> doctorsPatients = (List<Patient>) patientRepository.findDoctorsPatients(doctor);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @GetMapping(value="/api/visitation/get-all-notes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<MedicalNoteResponse>> getAllMedicalNotes() {
+        List<MedicalNote> repositoryAll = medicalNoteRepository.findAll();
+        List<MedicalNoteResponse> medicalNotes = repositoryAll.stream().map(medicalNote -> {
+            MedicalNoteResponse medicalNoteResponse = new MedicalNoteResponse();
+            if(medicalNote.getPatient() != null){
+                medicalNoteResponse.setPatientName(medicalNote.getPatient().getName());
+            }
+            medicalNoteResponse.setSickness(medicalNote.getSickness());
+            medicalNoteResponse.setTreatment(medicalNote.getTreatment());
+            if(medicalNote.getHospitationStartDate() != null && medicalNote.getHospitationEndDate() != null){
+                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+                formater.format(medicalNote.getHospitationStartDate());
+                medicalNoteResponse.setHospitalisationInterval(formater.format(medicalNote.getHospitationStartDate()) + " - " + formater.format(medicalNote.getHospitationEndDate()));
+            }
+            return medicalNoteResponse;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(medicalNotes);
     }
 }

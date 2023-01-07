@@ -52,7 +52,8 @@ export class PatientDashboardComponent implements OnInit {
     this.router.navigate(['/patient-visitation']);
   }
 
-  logPatient(element: any) {
-    console.log(element);
+  logout() {
+    this.localService.removeData('patientId');
+    this.router.navigate(['/login']);
   }
 }

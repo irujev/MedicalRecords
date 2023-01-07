@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MedicalNote, MedicalNoteResponse } from '../model/patient.model';
 import {
   MedicalNoteRequest,
   OpenVisitation,
@@ -46,6 +47,12 @@ export class VisitationService {
     return this.http.post<any>(
       this.adminUrl + '/patient/create-medical-note',
       medicalNoteData
+    );
+  }
+
+  public getAllDoctorsVisitations(): Observable<MedicalNoteResponse[]> {
+    return this.http.get<MedicalNoteResponse[]>(
+      this.adminUrl + '/visitation/get-all-notes'
     );
   }
 }
