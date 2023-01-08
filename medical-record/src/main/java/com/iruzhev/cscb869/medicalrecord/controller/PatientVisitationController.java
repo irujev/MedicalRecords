@@ -82,6 +82,7 @@ public class PatientVisitationController {
         note.setHospitationStartDate(createMedicalNoteRequest.getHospitationStartDate());
         note.setHospitationEndDate(createMedicalNoteRequest.getHospitationEndDate());
         Doctor doctor = doctorRepository.findById(createMedicalNoteRequest.getDoctorId()).get();
+        doctor.setVisitationCounter(doctor.getVisitationCounter()+1);
         note.setDoctor(doctor);
         Patient patient = patientRepository.getReferenceById(createMedicalNoteRequest.getPatientId());
         note.setPatient(patient);
@@ -89,6 +90,7 @@ public class PatientVisitationController {
 
         patient.getMedicalNotesHistory().add(note);
         patientRepository.save(patient);
+        doctorRepository.save(doctor);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

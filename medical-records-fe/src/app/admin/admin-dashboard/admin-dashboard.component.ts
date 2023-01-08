@@ -24,11 +24,14 @@ export class AdminDashboardComponent implements OnInit {
     'name',
     'specialty',
     'isPersonalDoctor',
+    'visitationCounter',
     'actions',
   ];
 
   doctors: Doctor[] = [];
   patients: Patient[] = [];
+  filteredPatients: Patient[] = [];
+  patientsCount = 0;
 
   constructor(
     private patientService: PatientService,
@@ -39,6 +42,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.patientService.findAllPatients().subscribe((patients) => {
+      this.patientsCount = patients.length;
       this.patients = patients;
     });
     this.doctorService.findAllDoctors().subscribe((doctors) => {
@@ -69,6 +73,18 @@ export class AdminDashboardComponent implements OnInit {
       .deleteDoctor(doctorId)
       .subscribe((doctor) => console.log('Doctor was deleted'));
   }
+
+  public doFilter = (event: any) => {
+    const value = (event.target as HTMLInputElement).value;
+    this.filteredPatients = this.patients.filter((patient) => {
+      return patient.personalDoctor.name
+        .toLocaleLowerCase()
+        .includes(value.trim().toLocaleLowerCase());
+    });
+    this.patientsCount = [
+      ...new Set(this.filteredPatients.map((patient) => patient.name)),
+    ].length;
+  };
 
   logout() {
     this.localService.removeData('isAdmin');

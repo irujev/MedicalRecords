@@ -20,11 +20,23 @@
 
 <mat-accordion>
   <mat-expansion-panel>
+    <div fxLayout fxLayoutAlign="center center">
+      <mat-form-field fxFlex="40%">
+        <mat-label>Филтрирай по лекар</mat-label>
+        <input
+          matInput
+          type="text"
+          (keyup)="doFilter($event)"
+          placeholder="Filter"
+        />
+      </mat-form-field>
+    </div>
+    <span>Брой пациенти със заболяване: {{ patientsCount }}</span>
     <mat-expansion-panel-header>
       <mat-panel-title> Пациенти </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <table mat-table [dataSource]="patients" class="mat-elevation-z8">
+    <table mat-table [dataSource]="filteredPatients" class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
@@ -120,6 +132,14 @@
             [disabled]="true"
             [(ngModel)]="element.isPersonalDoctor"
           ></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="visitationCounter">
+        <th mat-header-cell *matHeaderCellDef>Брой посещения</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.visitationCounter }}
         </td>
       </ng-container>
 

@@ -3,6 +3,7 @@ export interface Doctor {
   name: string;
   specialty: string;
   isPersonalDoctor: boolean;
+  visitationCounter: number;
 }
 export interface CreateDoctorRequest {
   name: string;

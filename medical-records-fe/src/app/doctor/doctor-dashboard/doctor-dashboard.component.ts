@@ -13,7 +13,8 @@ import { VisitationService } from 'src/app/service/visitation.service';
 })
 export class DoctorDashboardComponent implements OnInit {
   openDoctorVisitation: OpenVisitation[] = [];
-  allMedicalNotes = new MatTableDataSource<MedicalNoteResponse>();
+  filteredMedicalNotes: MedicalNoteResponse[] = [];
+  allMedicalNotes: MedicalNoteResponse[] = [];
   doctorVisitationsColumn: string[] = [
     'patientName',
     'complaints',
@@ -26,6 +27,7 @@ export class DoctorDashboardComponent implements OnInit {
     'treatment',
     'hospitalisationInterval',
   ];
+  patientsCount: number = 0;
 
   constructor(
     private visitationService: VisitationService,
@@ -42,7 +44,9 @@ export class DoctorDashboardComponent implements OnInit {
     this.visitationService
       .getAllDoctorsVisitations()
       .subscribe((visitations) => {
-        this.allMedicalNotes.data = visitations;
+        this.filteredMedicalNotes = visitations;
+        this.allMedicalNotes = visitations;
+        this.patientsCount = visitations.length;
       });
   }
 
@@ -56,7 +60,14 @@ export class DoctorDashboardComponent implements OnInit {
   }
   public doFilter = (event: any) => {
     const value = (event.target as HTMLInputElement).value;
-    this.allMedicalNotes.filter = value.trim().toLocaleLowerCase();
+    this.filteredMedicalNotes = this.allMedicalNotes.filter((note) => {
+      return note.sickness
+        .toLocaleLowerCase()
+        .includes(value.trim().toLocaleLowerCase());
+    });
+    this.patientsCount = [
+      ...new Set(this.filteredMedicalNotes.map((note) => note.patientName)),
+    ].length;
   };
   logout() {
     this.localService.removeData('doctorId');

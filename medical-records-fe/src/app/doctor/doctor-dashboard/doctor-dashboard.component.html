@@ -67,6 +67,7 @@
   <mat-expansion-panel>
     <div fxLayout fxLayoutAlign="center center">
       <mat-form-field fxFlex="40%">
+        <mat-label>Филтрирай по заболяване</mat-label>
         <input
           matInput
           type="text"
@@ -75,10 +76,15 @@
         />
       </mat-form-field>
     </div>
+    <span>Брой пациенти със заболяване: {{ patientsCount }}</span>
     <mat-expansion-panel-header>
       <mat-panel-title> История на прегледите </mat-panel-title>
     </mat-expansion-panel-header>
-    <table mat-table [dataSource]="allMedicalNotes" class="mat-elevation-z8">
+    <table
+      mat-table
+      [dataSource]="filteredMedicalNotes"
+      class="mat-elevation-z8"
+    >
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 

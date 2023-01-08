@@ -10,12 +10,7 @@ import { LocalService } from 'src/app/service/local.service';
   styleUrls: ['./doctor.component.scss'],
 })
 export class DoctorComponent implements OnInit {
-  doctor: Doctor = {
-    id: 0,
-    name: '',
-    specialty: '',
-    isPersonalDoctor: false,
-  };
+  doctor: Doctor = {} as Doctor;
 
   constructor(
     private router: Router,
